@@ -3,61 +3,60 @@
 
 using namespace std;
 
-template <typename E>
+template <typename T>
 class Queue
 {
   public:
     Queue(); //constructor
     ~Queue(); //destructor
 
-    void insert(E d);
-    E remove();
-    E peek();
+    void insert(T d);
+    T remove();
+    T peek();
     bool isEmpty();
 
     int front;
     int rear;
-    int size;
     int getSize();
 
-    LinkedList<E> myLinkedList;
+    LinkedList<T> myLinkedList;
 };
 
-template <typename E>Queue<E>::Queue(){
-  //initialize Linked List
-  size = 0;
+template <typename T>Queue<T>::Queue(){
+  myLinkedList<T>
   front = 0;
   rear = -1;
 }
 
-template <typename E>Queue<E>::~Queue(){
-  
+template <typename T>Queue<T>::~Queue(){
+
 }
 
-template <typename E>void Queue<E>::insert(E d){
-  //LinkedList insertBack function
-  size++;
+template <typename T>void Queue<T>::insert(T d){
+  myLinkedList<T>.insertFront(d);
   rear++;
 }
 
-template <typename E> E Queue<E>::remove(){
+template <typename T> T Queue<T>::remove(){
   //Check ifEmpty
+  T d = NULL;
   if(!isEmpty()){
-      //LinkedList removeFront function
+      d = myLinkedList.removeFront();
   } else {
     throw QueueException("Queue is empty, nothing to remove");
   }
+  return d;
 }
 
-template <typename E> E Queue<E>::peek(){
+template <typename T> T Queue<T>::peek(){
   //Might not be necessary
   //check ifEmpty
 }
 
-template <typename E> bool Queue<E>::isEmpty(){
+template <typename T> bool Queue<T>::isEmpty(){
   return myLinkedList.isEmpty();
 }
 
-template <typename E> int Queue<E>::getSize(){
-  return size;
+template <typename T> int Queue<T>::getSize(){
+  return myLinkedList.getSize();
 }
