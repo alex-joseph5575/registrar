@@ -1,5 +1,5 @@
 #include <iostream>
-#include "LinkedList.h"
+#include "GenLinkedList.h"
 
 using namespace std;
 
@@ -19,11 +19,11 @@ class Queue
     int rear;
     int getSize();
 
-    LinkedList<T> myLinkedList;
+    GenLinkedList<T> myLinkedList;
 };
 
 template <typename T>Queue<T>::Queue(){
-  myLinkedList<T>
+  myLinkedList = new GenLinkedList<T>();
   front = 0;
   rear = -1;
 }
@@ -33,7 +33,7 @@ template <typename T>Queue<T>::~Queue(){
 }
 
 template <typename T>void Queue<T>::insert(T d){
-  myLinkedList<T>.insertFront(d);
+  myLinkedList.insertFront(d);
   rear++;
 }
 
@@ -43,7 +43,9 @@ template <typename T> T Queue<T>::remove(){
   if(!isEmpty()){
       d = myLinkedList.removeFront();
   } else {
-    throw QueueException("Queue is empty, nothing to remove");
+    //throw QueueException("Queue is empty, nothing to remove");
+    cout << "Queue is empty, nothing to remove";
+    exit(0);
   }
   return d;
 }
