@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Student.h"
 
 using namespace std;
 
@@ -8,6 +9,7 @@ class Window
     bool isOpen;
     int idleTime;
     int responseTime;
+    Student currentStudent;
 
     Window();
     ~Window();

@@ -10,11 +10,11 @@ Student::Student(){
   exitTick = 0;
 }
 
-Student::Student(int wi, int wa, int en, int ex){
+Student::Student(int wi, int en){
   windowTime = wi;
-  waitTime = wa;
+  waitTime = 0;
   entryTick = en;
-  exitTick = ex;
+  exitTick = 0;
 }
 
 Student::~Student(){

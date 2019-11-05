@@ -10,7 +10,7 @@ public:
   int exitTick;
 
   Student();
-  Student(int wi, int wa, int en, int ex);
+  Student(int wi, int en);
   ~Student();
 
   int getWindowTime();
