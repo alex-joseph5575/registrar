@@ -19,29 +19,33 @@ class Queue
     int rear;
     int getSize();
 
-    GenLinkedList<T> myLinkedList;
+    GenLinkedList<T>* myLinkedList;
 };
 
-template <typename T>Queue<T>::Queue(){
+template <typename T>
+Queue<T>::Queue(){
   myLinkedList = new GenLinkedList<T>();
   front = 0;
   rear = -1;
 }
 
-template <typename T>Queue<T>::~Queue(){
+template <typename T>
+Queue<T>::~Queue(){
 
 }
 
-template <typename T>void Queue<T>::insert(T d){
-  myLinkedList.insertFront(d);
+template <typename T>
+void Queue<T>::insert(T d){
+  myLinkedList -> insertFront(d);
   rear++;
 }
 
-template <typename T> T Queue<T>::remove(){
+template <typename T>
+T Queue<T>::remove(){
   //Check ifEmpty
-  T d = NULL;
+  T d;
   if(!isEmpty()){
-      d = myLinkedList.removeFront();
+      d = myLinkedList -> removeFront();
   } else {
     //throw QueueException("Queue is empty, nothing to remove");
     cout << "Queue is empty, nothing to remove";
@@ -50,15 +54,18 @@ template <typename T> T Queue<T>::remove(){
   return d;
 }
 
-template <typename T> T Queue<T>::peek(){
+template <typename T>
+T Queue<T>::peek(){
   //Might not be necessary
   //check ifEmpty
 }
 
-template <typename T> bool Queue<T>::isEmpty(){
-  return myLinkedList.isEmpty();
+template <typename T>
+bool Queue<T>::isEmpty(){
+  return myLinkedList -> isEmpty();
 }
 
-template <typename T> int Queue<T>::getSize(){
-  return myLinkedList.getSize();
+template <typename T>
+int Queue<T>::getSize(){
+  return myLinkedList -> getSize();
 }
