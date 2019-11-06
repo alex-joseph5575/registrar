@@ -87,10 +87,14 @@ void GenLinkedList<T>::insertFront(T d)
   ListNode<T>* node = new ListNode<T>(d);
 
   if (size == 0)
+  {
     back = node;
+  }
   else
+  {
     node -> next = front;
     front -> prev = node;
+  }
 
   front = node;
   ++size;
@@ -100,6 +104,7 @@ template <typename T>
 T GenLinkedList<T>::removeFront()
 {
   ListNode<T>* ft = front;
+
   if (size == 1)
   {
     back = NULL;
@@ -108,6 +113,7 @@ T GenLinkedList<T>::removeFront()
   {
     front -> next -> prev = NULL;
   }
+
   front = front -> next;
   T temp = ft -> data;
   ft -> next = NULL;
@@ -121,10 +127,14 @@ void GenLinkedList<T>::insertBack(T d)
 {
   ListNode<T>* node = new ListNode<T>(d);
   if (size == 0)
-      front = node;
+  {
+    front = node;
+  }
   else
-      node -> prev = back;
-      back -> next = node;
+  {
+    node -> prev = back;
+    back -> next = node;
+  }
 
   back = node;
   ++size;
@@ -134,6 +144,7 @@ template <typename T>
 T GenLinkedList<T>::removeBack()
 {
   ListNode<T>* bk = back;
+
   if (size == 1)
   {
     front = NULL;
@@ -142,6 +153,7 @@ T GenLinkedList<T>::removeBack()
   {
     back -> prev -> next = NULL;
   }
+
   back = back -> prev;
   T temp = bk -> data;
   bk -> next = NULL;
@@ -153,6 +165,11 @@ T GenLinkedList<T>::removeBack()
 template <typename T>
 T GenLinkedList<T>::deletePos(int pos)
 {
+  if (pos > size - 1)
+  {
+    cout << "Tried to delete an item at a nonexistent position. Exiting gracefully." << endl;
+    exit(0);
+  }
   int idx = 0;  //tracks position
   ListNode<T>* current = front;
   ListNode<T>* previous = front;

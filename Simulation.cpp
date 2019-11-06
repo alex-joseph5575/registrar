@@ -23,31 +23,29 @@ void Simulation::Simulate(){
 
     getline(sourceFile, line);//Line 1
     temp = line.c_str();
-    Window winArr[atoi(temp)];
-    for(int i = 0; i < winArr.size; ++i){
+    int numWindows = atoi(temp);
+    Window winArr[numWindows];
+    for(int i = 0; i < numWindows; ++i){
       winArr[i] = Window();
     }
 
     getline(sourceFile, line);//Line 2
-    int entryTick = atoi(line);
+    int entryTick = atoi(line.c_str());
 
     int clockTick = 0;
     while(true){
       if(clockTick == entryTick){//Adding new set of students to the queue
         getline(sourceFile, line);
-        for(int i = 0; i < atoi(line); ++i){
+        for(int i = 0; i < atoi(line.c_str()); ++i){
           getline(sourceFile, line);
-          int windowTime = atoi(line);
-          studentQueue.insert(Student(windowTime, entryTick));
+          int windowTime = atoi(line.c_str());
+          studentQueue -> insert(Student(windowTime, entryTick));
         }
 
         getline(sourceFile, line);//new entry tick for next set of students
-        entryTick = atoi(line);
+        entryTick = atoi(line.c_str());
       }
-
-      clockTick++;
-    }
-
+      ++clockTick;
     }
   }
 }
