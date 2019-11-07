@@ -7,11 +7,32 @@ using namespace std;
 
 Simulation::Simulation(string f){
   fileName = f;
+  averageWait = 0.0;
+  medianWait = 0.0;
+  longestWait = 0.0;
+  tenPlus = 0.0;
+  averageIdle = 0.0;
+  longestIdle = 0.0;
+  fivePlus = 0.0;
 }
 
 Simulation::~Simulation(){
   delete studentQueue;
   delete studentList;
+}
+
+int compare(int* a, int* b)
+{
+	if (*a > *b)
+  {
+    return 1;
+  }
+	else if (*a < *b)
+  {
+    return -1;
+  }
+
+	return 0;
 }
 
 void Simulation::Simulate(){
@@ -50,7 +71,7 @@ void Simulation::Simulate(){
         if(winArr[i].isOpen){
           if(!studentQueue -> isEmpty()){
             winArr[i].currentStudent = studentQueue -> remove();
-            winArr[i].responseTime = winArr[i].currentStudent.WindowTime;
+            winArr[i].responseTime = winArr[i].currentStudent.windowTime;
             winArr[i].currentStudent.exitTick = clockTick;
             winArr[i].isOpen = false;
           }
@@ -72,6 +93,56 @@ void Simulation::Simulate(){
       }
       ++clockTick;
     }
+
+    //Calculate metrics
+    double numStudents = 0.0;
+    int listSize = studentList -> getSize();
+    Student s;
+
+    for (int i = 0; i < listSize; ++i)
+    {
+      s = studentList -> removeFront();
+      ++numStudents;
+      averageWait += s.waitTime;
+      medianWait += s.waitTime;
+      if (s.waitTime > longestWait)
+      {
+        longestWait = s.waitTime;
+      }
+
+      if (s.waitTime >= 10.0)
+      {
+        ++tenPlus;
+      }
+
+      averageWait /= numStudents;
+      medianWait /= 2.0;
+    }
+
+    for (Window w : winArr)
+    {
+      averageIdle += w.idleTime;
+      if (w.idleTime > longestIdle)
+      {
+        longestIdle = w.idleTime;
+      }
+
+      if (w.idleTime >= 5.0)
+      {
+        ++fivePlus;
+      }
+    }
+
   }
   sourceFile.close();
+
+
+  //Print metrics
+  cout << "Average student wait time: " << averageWait << " minutes" << endl;
+  cout << "Median student wait time: " << medianWait << " minutes" << endl;
+  cout << "Longest student wait time: " << longestWait << " minutes" << endl;
+  cout << "Number of students who waited longer than ten minutes: " << tenPlus << endl;
+  cout << "Average window idle time: " << averageIdle << " minutes" << endl;
+  cout << "Longest window idle time: " << longestIdle << " minutes" << endl;
+  cout << "Number of windows that idled longer than 5 minutes: " << fivePlus << endl;
 }

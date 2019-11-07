@@ -16,11 +16,11 @@ public:
 
   void Simulate();
 
-  int meanWait();
-  int medianWait();
-  int longestWait();
-  int longWait();
-  int meanIdle();
-  int longestIdle();
-  int idleNum();
+  double averageWait;
+  double medianWait;
+  double longestWait;
+  int tenPlus;
+  double averageIdle;
+  double longestIdle;
+  int fivePlus;
 };
