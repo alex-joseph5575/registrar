@@ -22,7 +22,7 @@ void Simulation::Simulate(){
     string line;
     const char* temp;
 
-    getline(sourceFile, line);//Line 1
+    getline(sourceFile, line);//Line 1: number of windows
     temp = line.c_str();
     int numWindows = atoi(temp);
     Window winArr[numWindows];
@@ -50,8 +50,8 @@ void Simulation::Simulate(){
         if(winArr[i].isOpen){
           if(!studentQueue -> isEmpty()){
             winArr[i].currentStudent = studentQueue -> remove();
-            winArr[i].responseTime = winArr[i].currentStudent.getWindowTime();
-            winArr[i].currentStudent.setExit(clockTick);
+            winArr[i].responseTime = winArr[i].currentStudent.WindowTime;
+            winArr[i].currentStudent.exitTick = clockTick;
             winArr[i].isOpen = false;
           }
           else{ //There is no student in the queue, so the window stays open and is idle
@@ -67,7 +67,11 @@ void Simulation::Simulate(){
           winArr[i].isOpen = true;
         }
       }
+      if(sourceFile.eof()){
+        break;
+      }
       ++clockTick;
     }
   }
+  sourceFile.close();
 }

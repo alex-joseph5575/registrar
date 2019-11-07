@@ -12,7 +12,6 @@ class Queue
 
     void insert(T d);
     T remove();
-    T peek();
     bool isEmpty();
 
     int front;
@@ -31,37 +30,31 @@ Queue<T>::Queue(){
 
 template <typename T>
 Queue<T>::~Queue(){
-
+  delete myLinkedList;
 }
 
 template <typename T>
-void Queue<T>::insert(T d){
+void Queue<T>::insert(T d){ //calls the LinkedList insert front function
   myLinkedList -> insertFront(d);
   rear++;
 }
 
 template <typename T>
-T Queue<T>::remove(){
+T Queue<T>::remove(){ //calls the LinkedList removefron function after error checking
   //Check ifEmpty
   T d;
   if(!isEmpty()){
       d = myLinkedList -> removeFront();
   } else {
-    //throw QueueException("Queue is empty, nothing to remove");
     cout << "Queue is empty, nothing to remove";
     exit(0);
   }
   return d;
 }
 
-template <typename T>
-T Queue<T>::peek(){
-  //Might not be necessary
-  //check ifEmpty
-}
 
 template <typename T>
-bool Queue<T>::isEmpty(){
+bool Queue<T>::isEmpty(){ 
   return myLinkedList -> isEmpty();
 }
 

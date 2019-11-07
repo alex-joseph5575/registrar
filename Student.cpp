@@ -11,40 +11,12 @@ Student::Student(){
 }
 
 Student::Student(int wi, int en){
-  windowTime = wi;
+  windowTime = wi; //given by file
   waitTime = 0;
-  entryTick = en;
+  entryTick = en; //given by file
   exitTick = 0;
 }
 
 Student::~Student(){
 
-}
-
-int Student::getWindowTime(){
-  return windowTime;
-}
-
-int Student::getWaitTime(){
-  return waitTime;
-}
-
-void Student::setWaitTime(int w){
-  waitTime = w;
-}
-
-int Student::getEntry(){
-  return entryTick;
-}
-
-void Student::setEntry(int en){
-  entryTick = en;
-}
-
-int Student::getExit(){
-  return exitTick;
-}
-
-void Student::setExit(int ex){
-  exitTick = ex;
 }
