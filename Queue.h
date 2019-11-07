@@ -44,17 +44,19 @@ T Queue<T>::remove(){ //calls the LinkedList removefron function after error che
   //Check ifEmpty
   T d;
   if(!isEmpty()){
+    cout << "Queue is working" << endl;
       d = myLinkedList -> removeFront();
   } else {
     cout << "Queue is empty, nothing to remove";
     exit(0);
   }
+  cout << "Queue is still working" << endl;
   return d;
 }
 
 
 template <typename T>
-bool Queue<T>::isEmpty(){ 
+bool Queue<T>::isEmpty(){
   return myLinkedList -> isEmpty();
 }
 

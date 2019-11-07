@@ -21,20 +21,6 @@ Simulation::~Simulation(){
   delete studentList;
 }
 
-int compare(int* a, int* b)
-{
-	if (*a > *b)
-  {
-    return 1;
-  }
-	else if (*a < *b)
-  {
-    return -1;
-  }
-
-	return 0;
-}
-
 void Simulation::Simulate(){
   ifstream sourceFile;
   sourceFile.open(fileName);
@@ -67,13 +53,27 @@ void Simulation::Simulate(){
         getline(sourceFile, line);//new entry tick for next set of students
         entryTick = atoi(line.c_str());
       }
+        cout << studentQueue -> getSize() << endl;
       for(int i = 0; i < numWindows; ++i){
+        cout << "Test1" << endl;
+        cout << winArr[i].isOpen << endl;
         if(winArr[i].isOpen){
+          cout << "Test2" << endl;
           if(!studentQueue -> isEmpty()){
-            winArr[i].currentStudent = studentQueue -> remove();
+            cout << "Test3" << endl;
+            Student stud;
+            cout << "Studdy" << endl;
+            stud = studentQueue -> remove();
+            cout << "Stud time" << endl;
+            winArr[i].currentStudent = stud;
+            cout << "Test4" << endl;
             winArr[i].responseTime = winArr[i].currentStudent.windowTime;
+            cout << "Test5" << endl;
             winArr[i].currentStudent.exitTick = clockTick;
+            cout << "Test6" << endl;
             winArr[i].isOpen = false;
+            cout << "Test7" << endl;
+
           }
           else{ //There is no student in the queue, so the window stays open and is idle
             ++winArr[i].idleTime;
@@ -83,9 +83,13 @@ void Simulation::Simulate(){
           --winArr[i].responseTime;
         }
 
+        cout << winArr[i].isOpen << endl;
         if(winArr[i].responseTime == 0 && !winArr[i].isOpen){
+          cout << "true" << endl;
           studentList -> insertFront(winArr[i].currentStudent);
+          cout << "insertfront works" << endl;
           winArr[i].isOpen = true;
+          cout << "got here" << endl;
         }
       }
       if(sourceFile.eof()){

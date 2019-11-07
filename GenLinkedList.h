@@ -26,7 +26,7 @@ class GenLinkedList
   private:
     ListNode<T>* front;
     ListNode<T>* back; //doubly linked list only
-    unsigned int size;  //size can't be negative
+    int size;  //size can't be negative
 };
 
 ///////////////////////////////////////////////
@@ -84,10 +84,13 @@ void GenLinkedList<T>::printList()
 template <typename T>
 void GenLinkedList<T>::insertFront(T d)
 {
+  cout << "pre node" << endl;
   ListNode<T>* node = new ListNode<T>(d);
+  cout << "node created" << endl;
 
   if (size == 0)
   {
+    cout << "checked size" << endl;
     back = node;
   }
   else
@@ -104,14 +107,17 @@ template <typename T>
 T GenLinkedList<T>::removeFront()
 {
   ListNode<T>* ft = front;
+  cout << "Front pointer set" << endl;
 
   if (size == 1)
   {
+    cout << "what the fuck" << endl;
     back = NULL;
+    cout << "Back = null" << endl;
   }
   else
   {
-    front -> next -> prev = NULL;
+    ft -> next -> prev = NULL;
   }
 
   front = front -> next;
