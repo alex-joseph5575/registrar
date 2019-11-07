@@ -47,7 +47,7 @@ void Simulation::Simulate(){
         entryTick = atoi(line.c_str());
       }
       for(int i = 0; i < numWindows; ++i){
-        if(winArr[i].isOpen()){
+        if(winArr[i].isOpen){
           if(!studentQueue -> isEmpty()){
             winArr[i].currentStudent = studentQueue -> remove();
             winArr[i].responseTime = winArr[i].currentStudent.getWindowTime();
@@ -62,10 +62,9 @@ void Simulation::Simulate(){
           --winArr[i].responseTime;
         }
 
-        if(winArr[i].responseTime == 0 && winArr[i].currentStudent != NULL){
-          studentList -> insertFront(winnArr[i].currentStudent);
-          winnArr[i].isOpen = true;
-          winnArr[i].currentStudent = NULL;
+        if(winArr[i].responseTime == 0 && !winArr[i].isOpen){
+          studentList -> insertFront(winArr[i].currentStudent);
+          winArr[i].isOpen = true;
         }
       }
       ++clockTick;
