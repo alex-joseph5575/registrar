@@ -11,6 +11,7 @@ Simulation::Simulation(string f){
 
 Simulation::~Simulation(){
   delete studentQueue;
+  delete studentList;
 }
 
 void Simulation::Simulate(){
@@ -44,6 +45,28 @@ void Simulation::Simulate(){
 
         getline(sourceFile, line);//new entry tick for next set of students
         entryTick = atoi(line.c_str());
+      }
+      for(int i = 0; i < numWindows; ++i){
+        if(winArr[i].isOpen()){
+          if(!studentQueue -> isEmpty()){
+            winArr[i].currentStudent = studentQueue -> remove();
+            winArr[i].responseTime = winArr[i].currentStudent.getWindowTime();
+            winArr[i].currentStudent.setExit(clockTick);
+            winArr[i].isOpen = false;
+          }
+          else{ //There is no student in the queue, so the window stays open and is idle
+            ++winArr[i].idleTime;
+          }
+        }
+        else { //Window is currently handling a student
+          --winArr[i].responseTime;
+        }
+
+        if(winArr[i].responseTime == 0 && winArr[i].currentStudent != NULL){
+          studentList -> insertFront(winnArr[i].currentStudent);
+          winnArr[i].isOpen = true;
+          winnArr[i].currentStudent = NULL;
+        }
       }
       ++clockTick;
     }

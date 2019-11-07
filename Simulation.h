@@ -7,6 +7,7 @@ using namespace std;
 class Simulation{
 public:
   Queue<Student>* studentQueue;
+  GenLinkedList<Student>* studentList;
   string fileName;
 
 
